@@ -52,7 +52,7 @@ The following **optional** features are implemented:
 - [ ] Users can repost a previous post by referencing its post ID. On the post page of the new post
   - Users can repost a previous post by referencing its post ID
   - On the post page of the new post, the referenced post is displayed and linked, creating a thread
-- [ ] Users can customize the interface
+- [X] Users can customize the interface
   - e.g., selecting the color scheme or showing the content and image of each post on the home feed
 - [X] Users can add more characterics to their posts
   - Users can share and view web videos
