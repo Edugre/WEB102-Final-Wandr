@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { supabase, getCurrentUser } from "../utils/supabase"
 import { Link } from "react-router-dom"
 import { FcLike } from "react-icons/fc";
+import { ThreeDot } from "react-loading-indicators"
 
 const PostScreen = () => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -13,11 +14,13 @@ const PostScreen = () => {
     const [currentUser, setCurrentUser] = useState(null)
     const [editingComment, setEditingComment] = useState(null)
     const [postLikes, setPostLikes] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
 
     
     useEffect(() => {
         const fetchPost = async () => {
             try {
+                setIsLoading(true)
                 const user = await getCurrentUser()
                 setCurrentUser(user)
                 
@@ -54,7 +57,8 @@ const PostScreen = () => {
 
             } catch (error) {
                 console.error('Error:', error)
-
+            } finally {
+                setIsLoading(false)
             }
         }
 
@@ -150,6 +154,10 @@ const PostScreen = () => {
 
     return (
         <div className="post-container">
+        { isLoading ? 
+            <div className="animation-container">
+                <ThreeDot variant="bob" color="#D92652" size="large" text="" textColor="" />
+            </div> :      
             <div className="post-card">
                 <div className="user-date">
                     <div className="user-info">
@@ -217,6 +225,7 @@ const PostScreen = () => {
                     </div>
                 </div>
             </div>
+            }
         </div>
     )
 }

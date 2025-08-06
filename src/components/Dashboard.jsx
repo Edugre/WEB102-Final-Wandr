@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js"
 import { Link, useSearchParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { FcLike } from "react-icons/fc";
+import { ThreeDot } from "react-loading-indicators";
 
 const Dashboard = () => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -10,9 +11,11 @@ const Dashboard = () => {
     const supabase = createClient(supabaseUrl, supabaseAnonKey)
     const [searchParams] = useSearchParams()
     const searchQuery = searchParams.get('search')
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const fetchPosts = async () => {
+            setIsLoading(true)
             try {
                 let query = supabase
                 .from('post')
@@ -44,6 +47,8 @@ const Dashboard = () => {
                 } 
             } catch (error) {
                 console.log(error)
+            } finally {
+                setIsLoading(false)
             }
         }
 
@@ -124,7 +129,12 @@ const Dashboard = () => {
                 <button className="form-button" onClick={sortByDate}>Newest</button>
                 <button className="form-button" onClick={sortByLikes}>Hottest</button>
             </div>
-            {posts?.map(post => {
+            { isLoading ? (
+                <div className="animation-container">
+                    <ThreeDot variant="bob" color="#D92652" size="large" text="" textColor="" />
+                </div>
+            ) : (
+                posts?.map(post => {
                 return (
                     <Link to={`/app/post/${post.post_id}`} key={post.post_id}>
                         <div className="post-card">
@@ -147,7 +157,8 @@ const Dashboard = () => {
                         </div>
                     </Link>
                 )
-            })}
+            })
+            )}
         </div>
     )
 }
