@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { supabase } from './utils/supabase'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -14,6 +15,11 @@ function App() {
     navigate(`/app/dashboard?search=${query}`)
   }
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    navigate('/')
+  }
+
   return (
     <div className='app-container'>
       <div className='navbar'>
@@ -24,6 +30,8 @@ function App() {
         <div className='links'>
           <Link to='/app/dashboard'>Home</Link>
           <Link to='/app/post/create'>Create new post</Link>
+          <Link to='/app/settings'>Settings</Link>
+          <a onClick={handleLogout}>Log Out</a>
         </div>
       </div>
       <div className='main-content'>

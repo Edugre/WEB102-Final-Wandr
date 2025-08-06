@@ -10,6 +10,7 @@ import AuthLayout from './components/AuthLayout.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import PostScreen from './components/PostScreen.jsx'
 import PostUpdate from './components/PostUpdate.jsx'
+import Settings from './components/Settings.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,7 +25,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='post/create' element={<PostCreate />}/>
           <Route path='post/:id' element={<PostScreen />}/>
           <Route path='post/:id/update' element={<PostUpdate />}/>
-          <Route path='settings' />
+          <Route path='settings' element={<Settings />}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -131,7 +131,7 @@ const Dashboard = () => {
             </div>
             { isLoading ? (
                 <div className="animation-container">
-                    <ThreeDot variant="bob" color="#D92652" size="large" text="" textColor="" />
+                    <ThreeDot variant="bob" color="var(--primary-color)" size="large" text="" textColor="" />
                 </div>
             ) : (
                 posts?.map(post => {
