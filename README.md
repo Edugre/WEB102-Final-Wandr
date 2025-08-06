@@ -64,6 +64,8 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [X] Added user authentication using supabase auth
+* [X] Hosted website using netlify
+* [X] Applied row level security to database tables
 
 ## Video Walkthrough
 
